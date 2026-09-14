@@ -5,7 +5,7 @@ I have a Campervan built on a Ford Transit Base and wanted to monitor the data t
 
 As a user of HomeAssistant and Grafana I wanted to monitor systems in my campervan and record and display various metrics from various sources.
 
-The Ford Sync system in my van talks back to Ford and monitors various metrics which I guess is where the Ford Sync App gets if information from. There is a HomeAssistant integration which enables us to pull in that data and expose it in HomeAssistant and the metrics are then held within the HomeAssistant database (I use MariaDB as the DB backend for HomeAssistant) and that data can then be used in tools such as Grafana.
+The Ford Sync system in my van talks back to Ford and monitors various metrics which I guess is where the Ford Sync App gets its information from. There is a HomeAssistant integration which enables us to pull in that data and expose it in HomeAssistant and the metrics are then held within the HomeAssistant database (I use MariaDB as the DB backend for HomeAssistant) and that data can then be used in tools such as Grafana.
 
 I’ll not cover using HomeAssistant or Grafana in this blog as that can be found elsewhere on the internet. I’ll cover some of what I used and did to produce some graphs like this in Grafana.
 
@@ -13,7 +13,7 @@ I’ll not cover using HomeAssistant or Grafana in this blog as that can be foun
 
 
 
-FordConnect Query Home Assistant Integration 2026 (EV/PHEV/Petrol/Diesel)
+## The FordConnect Query Home Assistant Integration 2026 (EV/PHEV/Petrol/Diesel)
 
 See https://github.com/marq24/ha-fordconnect-query for details to get the integration working in HomeAssistant. It’s quite complex and the step need to be followed closely but once done the sensors are exposed in HomeAssistant.
 
