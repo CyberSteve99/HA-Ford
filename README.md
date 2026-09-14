@@ -15,7 +15,7 @@ I’ll not cover using HomeAssistant or Grafana in this blog as that can be foun
 
 ## The FordConnect Query Home Assistant Integration 2026 (EV/PHEV/Petrol/Diesel)
 
-See https://github.com/marq24/ha-fordconnect-query for details to get the integration working in HomeAssistant. It’s quite complex and the step need to be followed closely but once done the sensors are exposed in HomeAssistant.
+See https://github.com/marq24/ha-fordconnect-query for details to get the integration working in HomeAssistant. It’s quite complex and the steps need to be followed closely but once done the sensors are exposed in HomeAssistant.
 
  <img width="452" height="250" alt="image" src="https://github.com/user-attachments/assets/02cf22e3-f7cb-46b5-959a-c2ba61d3bba6" />
 
