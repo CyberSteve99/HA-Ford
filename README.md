@@ -22,5 +22,5 @@ See https://github.com/marq24/ha-fordconnect-query for details to get the integr
 
 Ford Sync data is now available in HomeAssistant. Clicking any sensor shows the graphs for that sensor’s values.
 
-Next step is to Produce Grafana graphs. I have created a file that can be imported into Grafana.
+Next step is to Produce Grafana graphs. I have created a file that can be imported into Grafana. It's in the grafana directory.
 
