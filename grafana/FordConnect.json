@@ -1,0 +1,929 @@
+{
+  "apiVersion": "dashboard.grafana.app/v2",
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "ad79j7l",
+    "generation": 22,
+    "creationTimestamp": "2026-01-26T19:17:14Z",
+    "labels": {},
+    "annotations": {}
+  },
+  "spec": {
+    "annotations": [
+      {
+        "kind": "AnnotationQuery",
+        "spec": {
+          "query": {
+            "kind": "DataQuery",
+            "group": "grafana",
+            "version": "v0",
+            "spec": {},
+            "labels": {
+              "grafana.app/export-label": "grafana-1"
+            }
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "builtIn": true,
+          "legacyOptions": {
+            "type": "dashboard"
+          }
+        }
+      }
+    ],
+    "cursorSync": "Off",
+    "editable": true,
+    "elements": {
+      "panel-1": {
+        "kind": "Panel",
+        "spec": {
+          "id": 1,
+          "title": "Campervan Battery Charge",
+          "description": "Percentage Battery Charge",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "mysql",
+                      "version": "v0",
+                      "spec": {
+                        "dataset": "homeassistant",
+                        "editorMode": "code",
+                        "format": "table",
+                        "rawQuery": true,
+                        "rawSql": "SELECT last_updated_ts as time_sec, CAST(state AS FLOAT) as `Van Battery` FROM homeassistant.states \nWHERE\n  state <> 'unknown' and\n  state <> 'unavailable' and\n  metadata_id = (\n    SELECT\n      metadata_id\n    FROM\n      states_meta\n    WHERE\n      entity_id = 'sensor.fcq_wf0exxttrepp46023_battery'\n    ) \nAND last_updated_ts BETWEEN $__unixEpochFrom() AND $__unixEpochTo()",
+                        "sql": {
+                          "columns": [
+                            {
+                              "parameters": [],
+                              "type": "function"
+                            }
+                          ],
+                          "groupBy": [
+                            {
+                              "property": {
+                                "type": "string"
+                              },
+                              "type": "groupBy"
+                            }
+                          ],
+                          "limit": 50
+                        }
+                      },
+                      "labels": {
+                        "grafana.app/export-label": "mysql-1",
+                        "grafana.app/export-datasource-name": "Home Assistant"
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "timeseries",
+            "version": "12.3.1",
+            "spec": {
+              "options": {
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": false
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "percent",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  }
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      },
+      "panel-2": {
+        "kind": "Panel",
+        "spec": {
+          "id": 2,
+          "title": "Campervan Fuel Level",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "mysql",
+                      "version": "v0",
+                      "spec": {
+                        "dataset": "homeassistant",
+                        "editorMode": "code",
+                        "format": "table",
+                        "rawQuery": true,
+                        "rawSql": "SELECT last_updated_ts as time_sec, CAST(state AS FLOAT) as `Fuel Level` FROM homeassistant.states \nWHERE\n  state <> 'unknown' and\n  state <> 'unavailable' and\n  metadata_id = (\n    SELECT\n      metadata_id\n    FROM\n      states_meta\n    WHERE\n      entity_id = 'sensor.fcq_wf0exxttrepp46023_fuel'\n    ) \nAND last_updated_ts BETWEEN $__unixEpochFrom() AND $__unixEpochTo()",
+                        "sql": {
+                          "columns": [
+                            {
+                              "parameters": [],
+                              "type": "function"
+                            }
+                          ],
+                          "groupBy": [
+                            {
+                              "property": {
+                                "type": "string"
+                              },
+                              "type": "groupBy"
+                            }
+                          ],
+                          "limit": 50
+                        }
+                      },
+                      "labels": {
+                        "grafana.app/export-label": "mysql-1",
+                        "grafana.app/export-datasource-name": "Home Assistant"
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "timeseries",
+            "version": "12.3.1",
+            "spec": {
+              "options": {
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": false
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "percent",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  }
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      },
+      "panel-3": {
+        "kind": "Panel",
+        "spec": {
+          "id": 3,
+          "title": "Campervan Coolant Temp",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "mysql",
+                      "version": "v0",
+                      "spec": {
+                        "dataset": "homeassistant",
+                        "editorMode": "code",
+                        "format": "table",
+                        "rawQuery": true,
+                        "rawSql": "SELECT last_updated_ts as time_sec, CAST(state AS FLOAT) as `Coolant Temp` FROM homeassistant.states \nWHERE\n  state <> 'unknown' and\n  state <> 'unavailable' and\n  metadata_id = (\n    SELECT\n      metadata_id\n    FROM\n      states_meta\n    WHERE\n      entity_id = 'sensor.fcq_wf0exxttrepp46023_coolanttemp'\n    ) \nAND last_updated_ts BETWEEN $__unixEpochFrom() AND $__unixEpochTo()",
+                        "sql": {
+                          "columns": [
+                            {
+                              "parameters": [],
+                              "type": "function"
+                            }
+                          ],
+                          "groupBy": [
+                            {
+                              "property": {
+                                "type": "string"
+                              },
+                              "type": "groupBy"
+                            }
+                          ],
+                          "limit": 50
+                        }
+                      },
+                      "labels": {
+                        "grafana.app/export-label": "mysql-1",
+                        "grafana.app/export-datasource-name": "Home Assistant"
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "timeseries",
+            "version": "12.3.1",
+            "spec": {
+              "options": {
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": false
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "celsius",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  }
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      },
+      "panel-4": {
+        "kind": "Panel",
+        "spec": {
+          "id": 4,
+          "title": "Tyre Pressures (psi)",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "mysql",
+                      "version": "v0",
+                      "spec": {
+                        "dataset": "homeassistant",
+                        "editorMode": "code",
+                        "format": "table",
+                        "rawQuery": true,
+                        "rawSql": "SELECT\n  FLOOR(states.last_updated_ts) AS time_sec,\n  CAST(LEFT(JSON_VALUE(state_attributes.shared_attrs, '$.frontLeft'),LOCATE(' ',JSON_VALUE(state_attributes.shared_attrs, '$.frontLeft')) - 1) AS FLOAT) as frontLeft\nFROM states\nLEFT JOIN states_meta\n  ON states.metadata_id = states_meta.metadata_id\nLEFT JOIN state_attributes\n  ON states.attributes_id = state_attributes.attributes_id\nWHERE states_meta.entity_id = 'sensor.fcq_wf0exxttrepp46023_tirepressure' AND state <> 'unknown' AND state <> 'unavailable'\nGROUP BY time_sec\n",
+                        "sql": {
+                          "columns": [
+                            {
+                              "parameters": [],
+                              "type": "function"
+                            }
+                          ],
+                          "groupBy": [
+                            {
+                              "property": {
+                                "type": "string"
+                              },
+                              "type": "groupBy"
+                            }
+                          ],
+                          "limit": 50
+                        }
+                      },
+                      "labels": {
+                        "grafana.app/export-label": "mysql-1",
+                        "grafana.app/export-datasource-name": "Home Assistant"
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "mysql",
+                      "version": "v0",
+                      "spec": {
+                        "dataset": "homeassistant",
+                        "editorMode": "code",
+                        "format": "table",
+                        "rawQuery": true,
+                        "rawSql": "SELECT\n  FLOOR(states.last_updated_ts) AS time_sec,\n  CAST(LEFT(JSON_VALUE(state_attributes.shared_attrs, '$.frontRight'),LOCATE(' ',JSON_VALUE(state_attributes.shared_attrs, '$.frontRight')) - 1) AS FLOAT) as frontRight\nFROM states\nLEFT JOIN states_meta\n  ON states.metadata_id = states_meta.metadata_id\nLEFT JOIN state_attributes\n  ON states.attributes_id = state_attributes.attributes_id\nWHERE states_meta.entity_id = 'sensor.fcq_wf0exxttrepp46023_tirepressure' AND state <> 'unknown' AND state <> 'unavailable'\nGROUP BY time_sec\n",
+                        "sql": {
+                          "columns": [
+                            {
+                              "parameters": [],
+                              "type": "function"
+                            }
+                          ],
+                          "groupBy": [
+                            {
+                              "property": {
+                                "type": "string"
+                              },
+                              "type": "groupBy"
+                            }
+                          ],
+                          "limit": 50
+                        }
+                      },
+                      "labels": {
+                        "grafana.app/export-label": "mysql-1",
+                        "grafana.app/export-datasource-name": "Home Assistant"
+                      }
+                    },
+                    "refId": "B",
+                    "hidden": false
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "mysql",
+                      "version": "v0",
+                      "spec": {
+                        "dataset": "homeassistant",
+                        "editorMode": "code",
+                        "format": "table",
+                        "rawQuery": true,
+                        "rawSql": "SELECT\n  FLOOR(states.last_updated_ts) AS time_sec,\n  CAST(LEFT(JSON_VALUE(state_attributes.shared_attrs, '$.rearLeft'),LOCATE(' ',JSON_VALUE(state_attributes.shared_attrs, '$.rearLeft')) - 1) AS FLOAT) as rearLeft\nFROM states\nLEFT JOIN states_meta\n  ON states.metadata_id = states_meta.metadata_id\nLEFT JOIN state_attributes\n  ON states.attributes_id = state_attributes.attributes_id\nWHERE states_meta.entity_id = 'sensor.fcq_wf0exxttrepp46023_tirepressure' AND state <> 'unknown' AND state <> 'unavailable'\nGROUP BY time_sec\n",
+                        "sql": {
+                          "columns": [
+                            {
+                              "parameters": [],
+                              "type": "function"
+                            }
+                          ],
+                          "groupBy": [
+                            {
+                              "property": {
+                                "type": "string"
+                              },
+                              "type": "groupBy"
+                            }
+                          ],
+                          "limit": 50
+                        }
+                      },
+                      "labels": {
+                        "grafana.app/export-label": "mysql-1",
+                        "grafana.app/export-datasource-name": "Home Assistant"
+                      }
+                    },
+                    "refId": "C",
+                    "hidden": false
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "mysql",
+                      "version": "v0",
+                      "spec": {
+                        "dataset": "homeassistant",
+                        "editorMode": "code",
+                        "format": "table",
+                        "rawQuery": true,
+                        "rawSql": "SELECT\n  FLOOR(states.last_updated_ts) AS time_sec,\n  CAST(LEFT(JSON_VALUE(state_attributes.shared_attrs, '$.rearRight'),LOCATE(' ',JSON_VALUE(state_attributes.shared_attrs, '$.rearRight')) - 1) AS FLOAT) as rearRight\nFROM states\nLEFT JOIN states_meta\n  ON states.metadata_id = states_meta.metadata_id\nLEFT JOIN state_attributes\n  ON states.attributes_id = state_attributes.attributes_id\nWHERE states_meta.entity_id = 'sensor.fcq_wf0exxttrepp46023_tirepressure' AND state <> 'unknown' AND state <> 'unavailable'\nGROUP BY time_sec\n",
+                        "sql": {
+                          "columns": [
+                            {
+                              "parameters": [],
+                              "type": "function"
+                            }
+                          ],
+                          "groupBy": [
+                            {
+                              "property": {
+                                "type": "string"
+                              },
+                              "type": "groupBy"
+                            }
+                          ],
+                          "limit": 50
+                        }
+                      },
+                      "labels": {
+                        "grafana.app/export-label": "mysql-1",
+                        "grafana.app/export-datasource-name": "Home Assistant"
+                      }
+                    },
+                    "refId": "D",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "timeseries",
+            "version": "12.3.1",
+            "spec": {
+              "options": {
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  }
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      },
+      "panel-5": {
+        "kind": "Panel",
+        "spec": {
+          "id": 5,
+          "title": "Campervan Battery Voltage",
+          "description": "Percentage Battery Charge",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "mysql",
+                      "version": "v0",
+                      "spec": {
+                        "dataset": "homeassistant",
+                        "editorMode": "code",
+                        "format": "table",
+                        "rawQuery": true,
+                        "rawSql": "SELECT last_updated_ts as time_sec, \n\tCAST(JSON_VALUE(state_attributes.shared_attrs, '$.batteryVoltage') as FLOAT) as `Voltage` \n FROM homeassistant.states \nLEFT JOIN states_meta\n  ON states.metadata_id = states_meta.metadata_id\nLEFT JOIN state_attributes\n  ON states.attributes_id = state_attributes.attributes_id\nWHERE states_meta.entity_id = 'sensor.fcq_wf0exxttrepp46023_battery' AND state <> 'unknown' AND state <> 'unavailable'\nGROUP BY time_sec\n",
+                        "sql": {
+                          "columns": [
+                            {
+                              "parameters": [],
+                              "type": "function"
+                            }
+                          ],
+                          "groupBy": [
+                            {
+                              "property": {
+                                "type": "string"
+                              },
+                              "type": "groupBy"
+                            }
+                          ],
+                          "limit": 50
+                        }
+                      },
+                      "labels": {
+                        "grafana.app/export-label": "mysql-1",
+                        "grafana.app/export-datasource-name": "Home Assistant"
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "timeseries",
+            "version": "12.3.1",
+            "spec": {
+              "options": {
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": false
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "volt",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  }
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      }
+    },
+    "layout": {
+      "kind": "GridLayout",
+      "spec": {
+        "items": [
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 0,
+              "y": 0,
+              "width": 12,
+              "height": 8,
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-1"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 12,
+              "y": 0,
+              "width": 12,
+              "height": 8,
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-5"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 0,
+              "y": 8,
+              "width": 6,
+              "height": 8,
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-2"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 6,
+              "y": 8,
+              "width": 6,
+              "height": 8,
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-3"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 12,
+              "y": 8,
+              "width": 12,
+              "height": 8,
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-4"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "links": [],
+    "liveNow": false,
+    "preload": false,
+    "tags": [],
+    "timeSettings": {
+      "timezone": "browser",
+      "from": "now-24h",
+      "to": "now",
+      "autoRefresh": "",
+      "autoRefreshIntervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "hideTimepicker": false,
+      "fiscalYearStartMonth": 0
+    },
+    "title": "Campervan",
+    "variables": []
+  }
+}
+
+ 
+
+
