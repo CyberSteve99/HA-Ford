@@ -29,3 +29,9 @@ To monitor my Victron Devices in HomeAssistant and graph in Grafana I use the Ho
 <img width="1366" height="804" alt="image" src="https://github.com/user-attachments/assets/dab7b455-4c62-4524-9355-d81c17919894" />
 
 <img width="1136" height="678" alt="image" src="https://github.com/user-attachments/assets/764b41e4-ec52-43a3-8580-29305ade4330" />
+
+## My Setup
+
+I have a Raspberry Pi running HomeAssistant and Grafana at home and this runs the HA Ford integration.
+
+I have another Raspberry Pi in the van along with an ESP32 configured with ESPHome acting as a Bluetooth Low Energy (BLE) Proxy with the Victron BLE HomeAssistant integration as this collects the Victron devices information and needs to be within Bluetooth range. The ESP32 is also configured to collect data from my Fogstar Drift battery BMS. The Raspberry Pi and ESP32 in the van use the WiFi in the van which uses an Avtex router and is permanently powered. I use Tailscale as a VPN so that I can connect to the Raspberry Pi in the van from anywhere and query the HomeAssistant database from Home.
